@@ -1,0 +1,64 @@
+<div th:fragment="sidebar" >
+<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+    <div class="menu_section">
+        <h3>General</h3>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/admin/dashboard">Dashboard</a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-edit"></i> Branches <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/admin/dashboard/addBranch"> Add Branches </a></li>
+                    <li><a href="/admin/dashboard/branchList"> Branches List </a></li>
+                    <li><a href="/admin/dashboard/archivedBranchList"> Archived Branches</a></li>
+                    <li><a href="/admin/dashboard/addManagerForm"> Assign Managers </a></li>
+                    <li><a href="/admin/dashboard/ManagerList"> Managers List </a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-edit"></i> Teller <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/admin/dashboard/addTellerForm"> Add Tellers </a></li>
+                    <li><a href="/admin/dashboard/tellerList"> Teller List </a></li>
+                </ul>
+            </li>
+
+            <li><a><i class="fa fa-edit"></i> Employees <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/admin/dashboard/addUserForm"> Add Employee </a></li>
+                    <li><a href="/admin/dashboard/userList"> Employee List </a></li>
+                    <li><a href="/admin/dashboard/archivedUserList"> Archived Employee </a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-edit"></i>Loan Setup<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/admin/dashboard/addLoanSetupForm"> Add Loan Setup </a></li>
+                    <li><a href="/admin/dashboard/loanList"> Loan Setup List </a></li>
+                </ul>
+            </li>
+            <li><a><i class="fa fa-edit"></i>Document Code<span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="/admin/dashboard/documentNumberingList">Display Numbering Code </a></li>
+                </ul>
+            </li>
+
+    </div>
+
+
+</div>
+    <div class="sidebar-footer hidden-small">
+        <a data-toggle="tooltip" data-placement="top" title="Settings">
+            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
+            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Lock">
+            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+        </a>
+        <a data-toggle="tooltip" data-placement="top" title="Logout" href="/login/loginPage">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+        </a>
+    </div>
+</div>

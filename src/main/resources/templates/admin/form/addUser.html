@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>User Addition Form </title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- iCheck -->
+    <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{/css/custom.min.css}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <!-- menu profile quick info -->
+                <div th:replace="/sources/admin/UpperSidebar :: UpperSidebar"></div>
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div th:replace="/sources/admin/sidebar :: sidebar"></div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div th:replace="/sources/admin/topNav :: topNav"></div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Add Employee <small>to the Bank</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li th:switch="${del != null}">
+                                    <a th:href="'/admin/dashboard/deleteUser/'+ ${users.emp_code}"><img style="height: 30px; width:50px; float:right;margin-left:70%" th:case="${true}" th:src="@{/images/delete.png}"></a>
+                                </li>
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </li>
+                        <div class="x_content">
+                            <br />
+                            <div  th:switch="${users.photo != null}">
+                                <img style="height: 150px; width:150px; float:right;margin-left:98%" th:case="${true}" th:src="@{'/Documents/users/'+${users.photo}}" alt="....Image is being loaded....">
+                            </div>
+
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" enctype="multipart/form-data" method="post" th:action="@{/admin/dashboard/addUser}" th:object="${users}">
+
+                                <span class="section">Personal Info</span>
+                                <div class="form-group">
+
+
+                                </div>
+                                <div class="form-group" >
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                           for="emp_code"> Employee code: <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select th:field="*{emp_code}" class="form-control" th:switch="${users.emp_code == null}">
+                                                <option th:case="${true}" th:each="dn: ${documentNumbering}" th:value="${dn.displayNo}" th:text="${dn.displayNo}"></option>
+                                                <option th:case="*" th:each="dn: ${users}" th:value="${dn.emp_code}" th:text="${dn.emp_code}" ></option>
+                                            </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="first-name">First Name <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="first-name2" th:field="*{first_name}" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="middle-name" class="control-label col-md-3 col-sm-3">Middle Name </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input id="middle-name2" th:field="*{middle_name}" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="last-name">Last Name <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="last-name2" th:field="*{last_name}" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3">Gender</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div id="gender2" class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                <input type="radio" th:field="*{gender}" name="gender" value="male"> &nbsp; Male &nbsp;
+                                            </label>
+                                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                <input type="radio"  th:field="*{gender}" name="gender" value="female" checked=""> Female
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3">Date Of Birth <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input id="birthday2" th:field="*{date_of_birth}"  class="date-picker form-control col-md-7 col-xs-12" required="required" type="date">
+                                    </div>
+                                </div>
+
+                            <span class="section">Contact Info</span>
+                                <br>
+                                <span class="section"><h6>Permanent Address</h6></span>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="p-address">Permanent Address <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="p-address" th:field="*{p_address}"  required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="p-district"> District <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="p-district" th:field="*{p_district}"  required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="p-country">Country <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="p-country"  th:field="*{p_country}" required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                                <br>
+                                <span class="section"><h6>Temporary Address</h6></span>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="t-address">Temporary Address
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="t-address" th:field="*{t_address}"  class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="t-district"> District
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="t-district" th:field="*{t_district}"   class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="t-country">Country
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="t-country" th:field="*{t_country}"  class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                                <br>
+                                <span class="section"><h6>Contacts</h6></span>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="contact-1"> Contact 1 <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="contact-1" th:field="*{contact_1}"  required="required" class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="contact-2">Contact 2
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" id="contact-2" th:field="*{contact_2}"   class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+
+
+                            <span class="section">Work Info</span>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="role">Role <span >*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+<!--                                    <input type="text" id="role" required="required" class="form-control col-md-7 col-xs-12">-->
+                                    <select th:field="*{role}" class="form-control" required="required" name="role">
+                                        <option value="-"></option>
+                                        <option value="Teller">Teller</option>
+                                        <option value="Branch Manager">Branch Manager</option>
+                                        <option value="Non-Teller">Non-Teller</option>
+                                    </select>
+                                    <span class="required">Teller/ Non-Teller / Manager</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="position"> Position
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="text" th:field="*{position}"  id="position" class="form-control col-md-7 col-xs-12">
+                                    <span class="required">Only for Non-Teller Users</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" for="department"> Department <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <select th:field="*{department}" class="form-control"  name="department">
+                                        <option value="-"></option>
+                                        <option value="Loan">Loan</option>
+                                        <option value="Non-Loan">Non-Loan</option>
+                                    </select>
+                                    <span class="required">Loan/Non-Loan</span>
+                                </div>
+
+                            </div>
+                                <div class="form-group" >
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                           for="work_station"> Workstation (Branch): <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select th:field="*{work_station}" class="form-control">
+
+                                            <option th:each="b: ${allBranches}" th:value="${b.branch_code}" th:text="${b.branch_name}"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            <span class="section">Photo</span>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3" > Photo <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6">
+                                    <input type="file" name="photo"   class="form-control col-md-7 col-xs-12">
+                                </div>
+                            </div>
+                                <br>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button">Cancel</button>
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <div th:replace="/sources/admin/footer :: footer"></div>
+        <!-- /footer content -->
+    </div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+<!-- Chart.js -->
+<script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
+<!-- gauge.js -->
+<script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
+<!-- bootstrap-progressbar -->
+<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+<!-- iCheck -->
+<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+<!-- Skycons -->
+<script th:src="@{/vendors/skycons/skycons.js}"></script>
+<!-- Flot -->
+<script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
+<!-- Flot plugins -->
+<script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+<script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+<script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
+<!-- DateJS -->
+<script th:src="@{/vendors/DateJS/build/date.js}"></script>
+<!-- JQVMap -->
+<script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
+<script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+<script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+<!-- bootstrap-daterangepicker -->
+<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+
+<!-- Custom Theme Scripts -->
+<script th:src="@{/js/custom.min.js}"></script>
+
+</body>
+</html>

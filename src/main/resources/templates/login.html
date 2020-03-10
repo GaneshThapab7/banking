@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gentelella Alela! | </title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- Animate.css -->
+    <link th:href="@{/vendors/animate.css/animate.min.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{/css/custom.min.css}" rel="stylesheet">
+</head>
+
+
+
+<!--<style>-->
+<!--body {-->
+<!--  background-image: url('../images/loginbackgroung.png');-->
+<!--}-->
+<!--</style>-->
+<body class="login" style="background-image: url('static/images/loginbackground.jpg'); background-repeat: no-repeat; background-attachment: fixed; background-size: 100% 100%; Opacity: 1">
+<div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+
+    <div class="login_wrapper">
+        <div class="animate form login_form">
+            <section class="login_content">
+                <form method="post" th:action="@{/login}">
+                    <h1>Login Form</h1>
+                    {{message}}
+                    <div for="username">
+                        <input type="text" class="form-control" placeholder="Username" required="" th:name="username" />
+                    </div>
+                    <div for="password">
+                        <input type="password" class="form-control" placeholder="Password" required="" th:name="password" />
+                    </div>
+<!--                    <div>-->
+<!--                        <a class="btn btn-default submit">Log in</a>-->
+<!--&lt;!&ndash;                        <a class="reset_pass" href="#">Lost your password?</a>&ndash;&gt;-->
+<!--                    </div>-->
+
+                    <div class="form-action">
+                        <button type="submit" class="btn">Login</button>
+                    </div>
+<!--                    <div class="form-group" style="margin-left:20%">-->
+<!--                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">-->
+<!--&lt;!&ndash;                            <button class="btn btn-primary" type="button">Cancel</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <button class="btn btn-primary" type="reset">Reset</button>&ndash;&gt;-->
+<!--                            <button type="submit" class="btn btn-success">Login</button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <div class="clearfix"></div>
+                        <br />
+
+                        <div>
+                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+                            <p>©2020 All Rights Reserved</p>
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/favicon.ico" type="image/ico" />
+
+    <title>User Addition Form </title>
+
+    <!-- Bootstrap -->
+    <link th:href="@{/vendors/bootstrap/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link th:href="@{/vendors/font-awesome/css/font-awesome.min.css}" rel="stylesheet">
+    <!-- NProgress -->
+    <link th:href="@{/vendors/nprogress/nprogress.css}" rel="stylesheet">
+    <!-- iCheck -->
+    <link th:href="@{/vendors/iCheck/skins/flat/green.css}" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link th:href="@{/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css}" rel="stylesheet">
+    <!-- JQVMap -->
+    <link th:href="@{/vendors/jqvmap/dist/jqvmap.min.css}" rel="stylesheet"/>
+    <!-- bootstrap-daterangepicker -->
+    <link th:href="@{/vendors/bootstrap-daterangepicker/daterangepicker.css}" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link th:href="@{/css/custom.min.css}" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+<div class="container body">
+    <div class="main_container">
+        <div class="col-md-3 left_col">
+            <div class="left_col scroll-view">
+                <!-- menu profile quick info -->
+                <div th:replace="/sources/non-teller/UpperSidebar :: UpperSidebar"></div>
+                <!-- /menu profile quick info -->
+
+                <br />
+
+                <!-- sidebar menu -->
+                <div th:replace="/sources/non-teller/sidebar :: sidebar"></div>
+                <!-- /sidebar menu -->
+
+                <!-- /menu footer buttons -->
+
+                <!-- /menu footer buttons -->
+            </div>
+        </div>
+
+        <!-- top navigation -->
+        <div th:replace="/sources/non-teller/topNav :: topNav"></div>
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            <h2>Add Loan Customer <small>to the Bank</small></h2>
+                            <ul class="nav navbar-right panel_toolbox">
+                                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="#">Settings 1</a>
+                                        </li>
+                                        <li><a href="#">Settings 2</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" th:action="@{/admin/dashboard/addLoanCustomer}" th:object="${loan_customers}">
+
+                                <span class="section">Personal Info</span>
+
+                                <div class="form-group" >
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12"
+                                           for="customer_code"> Customer code: <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select th:field="*{customer_code}" class="form-control" th:switch="${loan_customers.customer_code == null}">
+                                            <option th:case="${true}" th:each="dn: ${documentNumbering}" th:value="${dn.displayNo}" th:text="${dn.displayNo}"></option>
+                                            <option th:case="*" th:each="dn: ${customers}" th:value="${dn.customer_code}" th:text="${dn.customer_code}" ></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="first-name">First Name <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="first-name2" th:field="*{first_name}" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="middle-name" class="control-label col-md-3 col-sm-3">Middle Name </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input id="middle-name2" th:field="*{middle_name}" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="last-name">Last Name <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="last-name2" th:field="*{last_name}" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3">Gender</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <div id="gender2" class="btn-group" data-toggle="buttons">
+                                            <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                <input type="radio" th:field="*{gender}" name="gender" value="male"> &nbsp; Male &nbsp;
+                                            </label>
+                                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                <input type="radio"  th:field="*{gender}" name="gender" value="female" checked=""> Female
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3">Date Of Birth <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input id="birthday2" th:field="*{date_of_birth}"  class="date-picker form-control col-md-7 col-xs-12" required="required" type="date">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="occupation">Occupation <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="occupation" th:field="*{occupation}"  required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="tentative_yearly_income">Tentative Yearly Income <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="tentative_yearly_income" th:field="*{tentative_yearly_income}"  required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="citozenship_no">Citizenship No. <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="citizenship_no" th:field="*{citizenship_no}"  required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="existing_customer">Existing Customer:
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="checkbox" id="on_loan" th:field="*{existing_customer}" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <span class="section">Contact Info</span>
+                                <br>
+                                <span class="section"><h6>Permanent Address</h6></span>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="p-address">Permanent Address <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="p-address" th:field="*{p_address}"  required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="p-district"> District <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="p-district" th:field="*{p_district}"  required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="p-country">Country <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="p-country"  th:field="*{p_country}" required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <br>
+                                <span class="section"><h6>Temporary Address</h6></span>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="t-address">Temporary Address
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="t-address" th:field="*{t_address}"  class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="t-district"> District
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="t-district" th:field="*{t_district}"   class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="t-country">Country
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="t-country" th:field="*{t_country}"  class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="contact-1"> Contact 1 <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="contact-1" th:field="*{contact_1}"  required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3" for="contact-2">Contact 2
+                                    </label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="text" id="contact-2" th:field="*{contact_2}"   class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+                                <span class="section">Nominee</span>
+
+                                <div class="relatives">
+                                    <div class="table-responsive scroll" style="width:90%; margin-left:5%;margin-right:5%">
+                                        <table class="table" id="idJagaaBibaranTable">
+                                            <thead>
+                                            <tr class="parent">
+                                                <th>Relation</th>
+                                                <th>First Name</th>
+                                                <th>Middle Name</th>
+                                                <th>Last Name</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <select name="relatives[0].relation" style="padding:2%; width:150px">
+                                                        <option value="Nominee">Nominee</option>
+
+                                                    </select>
+                                                <td><input type="text" required="required" name="relatives[0].first_name"/>
+
+                                                <td><input type="text"  name="relatives[0].middle_name"/>
+
+                                                <td><input type="text" required="required" name="relatives[0].last_name"/>
+
+
+                                            </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                        </div>
+                        <span class="section">Documents</span>
+                        <div class="documents">
+                            <div class="table-responsive scroll" style="width:90%; margin-left:5%;margin-right:5%">
+                                <table class="table" id="idJagaaBibaranTable1">
+                                    <thead>
+                                    <tr class="parent">
+                                        <th>Name / Remark</th>
+                                        <th>Attachment</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td><input type="text" required="required" name="document[0].remarks"/>
+
+                                        <td><input type="file" required="required" name="document[0].picture"/>
+
+                                        <td><input type="text"  name="document[0].doc_package_code" value="loan" placeholder="Loan" readonly="readonly" hidden="true"/>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                                <div>
+                                </div>
+                                <div class="box-body text-center">
+                                    <button type="button" class="btn btn-success btn-md btn-action plus">+</button>
+                                    <button type="button" class="btn btn-danger btn-md btn-action minus">-</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="ln_solid"></div>
+                        <div class="form-group" style="margin-left:20%">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button class="btn btn-primary" type="button">Cancel</button>
+                                <button class="btn btn-primary" type="reset">Reset</button>
+                                <button type="submit" class="btn btn-success">Proceed</button>
+                            </div>
+                        </div>
+
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- /page content -->
+
+<!-- footer content -->
+<div th:replace="/sources/admin/footer :: footer"></div>
+<!-- /footer content -->
+</div>
+</div>
+
+<!-- jQuery -->
+<script th:src="@{/vendors/jquery/dist/jquery.min.js}"></script>
+<!-- Bootstrap -->
+<script th:src="@{/vendors/bootstrap/dist/js/bootstrap.min.js}"></script>
+<!-- FastClick -->
+<script th:src="@{/vendors/fastclick/lib/fastclick.js}"></script>
+<!-- NProgress -->
+<script th:src="@{/vendors/nprogress/nprogress.js}"></script>
+<!-- Chart.js -->
+<script th:src="@{/vendors/Chart.js/dist/Chart.min.js}"></script>
+<!-- gauge.js -->
+<script th:src="@{/vendors/gauge.js/dist/gauge.min.js}"></script>
+<!-- bootstrap-progressbar -->
+<script th:src="@{/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js}"></script>
+<!-- iCheck -->
+<script th:src="@{/vendors/iCheck/icheck.min.js}"></script>
+<!-- Skycons -->
+<script th:src="@{/vendors/skycons/skycons.js}"></script>
+<!-- Flot -->
+<script th:src="@{/vendors/Flot/jquery.flot.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.pie.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.time.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.stack.js}"></script>
+<script th:src="@{/vendors/Flot/jquery.flot.resize.js}"></script>
+<!-- Flot plugins -->
+<script th:src="@{/vendors/flot.orderbars/js/jquery.flot.orderBars.js}"></script>
+<script th:src="@{/vendors/flot-spline/js/jquery.flot.spline.min.js}"></script>
+<script th:src="@{/vendors/flot.curvedlines/curvedLines.js}"></script>
+<!-- DateJS -->
+<script th:src="@{/vendors/DateJS/build/date.js}"></script>
+<!-- JQVMap -->
+<script th:src="@{/vendors/jqvmap/dist/jquery.vmap.js}"></script>
+<script th:src="@{/vendors/jqvmap/dist/maps/jquery.vmap.world.js}"></script>
+<script th:src="@{/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js}"></script>
+<!-- bootstrap-daterangepicker -->
+<script th:src="@{/vendors/moment/min/moment.min.js}"></script>
+<script th:src="@{/vendors/bootstrap-daterangepicker/daterangepicker.js}"></script>
+
+<!-- Custom Theme Scripts -->
+<script th:src="@{/js/custom.min.js}"></script>
+
+<script>
+        //Clone Table
+        $(document).ready(function () {
+            var count = 1;
+
+            $('.plus').on('click', function () {
+                count++;
+
+                var tblBody = $('#idJagaaBibaranTable1');
+
+                var row_to_clone = tblBody.find('tr').last();
+                var row_name = row_to_clone.find('input').attr('name');
+
+                //Find the position- its in between two square brackets
+                var braces_start = row_name.indexOf('[');
+                var braces_end = row_name.indexOf(']');
+                var list_position = row_name.slice(braces_start + 1, braces_end);
+
+                var row_cloned = row_to_clone.clone(true, true).appendTo(tblBody);
+
+                console.log("list " + list_position);
+
+
+                //Clear the new textfield created
+                row_cloned.find('input').val('');
+                row_cloned.find('selected').valueOf('');
+
+                //Set new name for each added rows
+                var new_list_position = parseInt(list_position) + parseInt("1");
+
+
+
+                row_cloned.find('td').each(function () {
+
+                    var name = $(this).find(':input,:selected').attr('name');
+                    $(this).find(':input,:selected').attr('name', name.replace('[' + list_position + ']', '[' + new_list_position + ']'));
+
+                });
+
+                $('#idJagaaBibaranTable1').find('tr').last().each(function () {
+
+                });
+            });
+        });
+
+        $('.minus').on('click', function () {
+            var tblBody = $('#idJagaaBibaranTable1');
+            var row_to_clone = tblBody.find('tr').last();
+            //One of the <tr> contains <th> itself.
+            if (tblBody.find('tr').siblings().length > 1)
+                row_to_clone.remove();
+
+        });
+
+        // Horizontally Scroll
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                "scrollX": true
+            });
+        });
+    </script>
+
+
+</body>
+</html>
