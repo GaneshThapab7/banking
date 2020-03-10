@@ -34,7 +34,7 @@ public class BranchManagerController {
         List<Branches> branches = branchesRepository.findAll();
         model.addAttribute("branches", branches);
 
-        List<Users> users = userRepository.findAll();
+        List<users> users = userRepository.findAll();
         model.addAttribute("users",users);
 
         return "admin/form/addManager";
@@ -62,7 +62,7 @@ public class BranchManagerController {
         Branch_Manager retData = branchManagerRepository.findById(id).get();
         model.addAttribute("branch_manager", retData);
 
-        List<Users> users = userRepository.findAll();
+        List<users> users = userRepository.findAll();
         model.addAttribute("users",users);
         model.addAttribute("del",true);
         List<Branches> allBranch = branchesRepository.findAll();

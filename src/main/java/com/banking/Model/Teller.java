@@ -25,7 +25,7 @@ public class Teller implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     @JoinColumn(name = "emp_code",nullable=true,unique = true)
-    private Users users;
+    private users users;
 
     private String full_name;
 
@@ -37,7 +37,7 @@ public class Teller implements Serializable {
     public Teller() {
     }
 
-    public Teller(int id, @NotNull String teller_code, Branches branches, Users users, String full_name, String from_date, String to_date) {
+    public Teller(int id, @NotNull String teller_code, Branches branches, users users, String full_name, String from_date, String to_date) {
         this.id = id;
         this.teller_code = teller_code;
         this.branches = branches;
@@ -71,11 +71,11 @@ public class Teller implements Serializable {
         this.branches = branches;
     }
 
-    public Users getUsers() {
+    public users getUsers() {
         return users;
     }
 
-    public void setUsers(Users users) {
+    public void setUsers(users users) {
         this.users = users;
     }
 

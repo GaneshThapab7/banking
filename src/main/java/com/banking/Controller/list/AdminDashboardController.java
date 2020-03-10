@@ -1,6 +1,6 @@
 package com.banking.Controller.list;
 
-import com.banking.Model.Users;
+import com.banking.Model.users;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

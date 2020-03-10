@@ -1,7 +1,7 @@
 package com.banking.Controller.list;
 
 import com.banking.Model.Transaction;
-import com.banking.Model.Users;
+import com.banking.Model.users;
 import com.banking.Repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

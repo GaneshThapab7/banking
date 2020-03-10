@@ -92,7 +92,7 @@ public class TellerController {
         Teller retData = tellerRepository.findById(id).get();
         model.addAttribute("teller", retData);
 
-        List<Users> users = userRepository.findAll();
+        List<users> users = userRepository.findAll();
         model.addAttribute("users",users);
 
         List<Branches> allBranch = branchesRepository.findAll();

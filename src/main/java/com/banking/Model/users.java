@@ -9,7 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 
-public class Users {
+public class users {
     @Id
     public String emp_code;
 
@@ -60,13 +60,13 @@ public class Users {
     private Boolean archived;
 
     // Empty Constructor
-    public Users() {
+    public users() {
     }
 
     // Parameterized Constructor
 
 
-    public Users(String emp_code, @NotNull String first_name, String middle_name, @NotNull String last_name, @NotNull String gender, @NotNull String p_address, @NotNull String p_district, @NotNull String p_country, @NotNull String t_address, @NotNull String t_district, @NotNull String t_country, String photo, @NotNull String username, @NotNull String password, @NotNull String contact_1, String contact_2, String role, @NotNull String position, @NotNull String department, String date_of_birth, List<Branches> work_station, Boolean archived) {
+    public users(String emp_code, @NotNull String first_name, String middle_name, @NotNull String last_name, @NotNull String gender, @NotNull String p_address, @NotNull String p_district, @NotNull String p_country, @NotNull String t_address, @NotNull String t_district, @NotNull String t_country, String photo, @NotNull String username, @NotNull String password, @NotNull String contact_1, String contact_2, String role, @NotNull String position, @NotNull String department, String date_of_birth, List<Branches> work_station, Boolean archived) {
         this.emp_code = emp_code;
         this.first_name = first_name;
         this.middle_name = middle_name;

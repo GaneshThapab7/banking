@@ -1,21 +1,24 @@
 package com.banking.login;
 
 
-import com.banking.Model.Users;
+import com.banking.Model.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
 
 @Controller
+@RequestMapping("/login")
 public class LoginController {
    
 	
@@ -23,18 +26,18 @@ public class LoginController {
 	@Autowired
 	private login logininterface;
 
-//    @GetMapping("/login")
-//    private String getLoginPage(Model model) {
-//        return "login";
-//    }
+    @GetMapping
+    private String getLoginPage(Model model) {
+        return "login";
+   }
 
 //    @PostMapping(value = "/loginConfirm")
 //    private String loginCheck(Model model, User){
 //
 //    }
 
-    @RequestMapping(value = ("/login"), method = RequestMethod.GET)
-    public String login(@ModelAttribute logindto logindto,Model mod) {
+    @PostMapping
+    public String login(@ModelAttribute("logindto") logindto logindto,ModelMap mod) {
 
        /* Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (!(auth instanceof AnonymousAuthenticationToken)) {
@@ -45,6 +48,7 @@ public class LoginController {
         }*/
 
     String loginreport=	logininterface.loginin(logindto);
+    System.out.println(loginreport);
     	if(loginreport.equals("nouser")) {
     		mod.addAttribute("message", "User Dosent Exist!!!");
     		return "redirect:/login";

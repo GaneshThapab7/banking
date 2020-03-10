@@ -2,7 +2,7 @@ package com.banking.Controller.form;
 
 import com.banking.Model.Branches;
 import com.banking.Model.Number_Generator;
-import com.banking.Model.Users;
+import com.banking.Model.users;
 import com.banking.Repository.BranchesRepository;
 import com.banking.Repository.Interface.ServicesInterface;
 import com.banking.Repository.Number_GeneratorRepository;
@@ -39,8 +39,8 @@ public class UserController {
         List<Branches> allBranches= branchesRepository.findAll();
         model.addAttribute("allBranches", allBranches);
 
-        List<Users> users= userRepository.findAll();
-        model.addAttribute("users", new Users());
+        List<users> users= userRepository.findAll();
+        model.addAttribute("users", new users());
         Number_Generator number_generator= number_generatorRepository.findById(1).get();
         model.addAttribute("documentNumbering", number_generator);
         return "admin/form/addUser";
@@ -48,13 +48,13 @@ public class UserController {
 
     @GetMapping(value = "/userList")
     private String getUserList(Model model) {
-        List<Users> users= userRepository.UnArchivedUsers();
+        List<users> users= userRepository.UnArchivedUsers();
         model.addAttribute("users", users);
         return "admin/table/userTable";
     }
     @GetMapping(value = "/archivedUserList")
     private String getArchivedUserList(Model model) {
-        List<Users> users= userRepository.ArchivedUser();
+        List<users> users= userRepository.ArchivedUser();
         model.addAttribute("users", users);
         return "admin/table/userTable";
     }
@@ -67,7 +67,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/addUser")
-    private String addUser(@RequestParam("photo") MultipartFile photo, Model model, @Valid Users user, BindingResult bindingResult)  {
+    private String addUser(@RequestParam("photo") MultipartFile photo, Model model, @Valid users user, BindingResult bindingResult)  {
 
         if (photo.isEmpty() == false){
             String photo_name = user.getEmp_code()+user.getFirst_name()+"."+photo.getOriginalFilename().split("\\.")[1];
@@ -82,7 +82,7 @@ public class UserController {
         }
         else {
             try {
-                Users users = userRepository.findById(user.getEmp_code()).get();
+                users users = userRepository.findById(user.getEmp_code()).get();
                     user.setPhoto(users.getPhoto());
             }
             catch (Exception e){
@@ -112,14 +112,14 @@ public class UserController {
 
         model.addAttribute("success","           User has been Updated Successfully              ");
         model.addAttribute("num", number_generatorRepository.findById(1).get().getDisplayNo());
-        List<Users> users= userRepository.findAll();
+        List<users> users= userRepository.findAll();
         model.addAttribute("users", users);
         return "admin/table/userTable";
     }
 
     @RequestMapping(value = "/updateUserData/{id}")
     public String updateUsersData(@PathVariable("id") String id, Model model){
-        Users retData = userRepository.findById(id).get();
+        users retData = userRepository.findById(id).get();
         System.out.println(retData.getPhoto());
         model.addAttribute("del",true);
         model.addAttribute("users", retData);
@@ -127,7 +127,7 @@ public class UserController {
     }
     @RequestMapping(value = "/deleteUser/{id}")
     public String deleteUser(@PathVariable("id") String emp_code,Model model){
-        Users ret_data = userRepository.findById(emp_code).get();
+        users ret_data = userRepository.findById(emp_code).get();
         try {
             userRepository.delete(ret_data);
         }

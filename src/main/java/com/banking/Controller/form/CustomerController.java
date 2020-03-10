@@ -3,7 +3,7 @@ package com.banking.Controller.form;
 import com.banking.Model.Account;
 import com.banking.Model.Customer;
 import com.banking.Model.Number_Generator;
-import com.banking.Model.Users;
+import com.banking.Model.users;
 import com.banking.Repository.CustomerRepository;
 import com.banking.Repository.Interface.ServicesInterface;
 import com.banking.Repository.Number_GeneratorRepository;

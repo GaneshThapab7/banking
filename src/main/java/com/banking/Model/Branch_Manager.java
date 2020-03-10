@@ -24,7 +24,7 @@ public class Branch_Manager implements Serializable {
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "emp_code",nullable = false, unique = true)
-    private Users users;
+    private users users;
 
     @NotNull
     private String full_name;
@@ -39,7 +39,7 @@ public class Branch_Manager implements Serializable {
 
     // Parameterized Constructors
 
-    public Branch_Manager(int id, @NotNull String from_date, String to_date, Users users, @NotNull String full_name, Branches branches) {
+    public Branch_Manager(int id, @NotNull String from_date, String to_date, users users, @NotNull String full_name, Branches branches) {
         this.id = id;
         this.from_date = from_date;
         this.to_date = to_date;
@@ -76,11 +76,11 @@ public class Branch_Manager implements Serializable {
         this.to_date = to_date;
     }
 
-    public Users getUsers() {
+    public users getUsers() {
         return users;
     }
 
-    public void setUsers(Users users) {
+    public void setUsers(users users) {
         this.users = users;
     }
 
